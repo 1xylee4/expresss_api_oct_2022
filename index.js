@@ -1,12 +1,14 @@
 //import the express package as expressRef
 let expressRef = require ('express')
 const { default: mongoose } = require('mongoose')
-let gmModel = require ("./goodmorning_model")
+let gmModel = require ("./goodmorning_model") 
+let cors = require ("cors")
 let PORT = 1234
 
 // use expressRef to create express app
 let app = expressRef()
 app.use(expressRef.json())
+app.use(cors())
 
 //connect to mngodb in the cloud
 let connectionString = "mongodb+srv://admin:140697@clusteryeah.dc2nofc.mongodb.net/thoughts"
@@ -50,6 +52,7 @@ app.get("/welcome", (request,response)=>{
 })
 
 //get the list of quotes from mongodb database in cloud
+//http://localhost1234/goodmorning/all
 app.get("/goodmorning/all",(request,response)=>{
     console.log("Get all quotes from goodmorning collection.....")
     gmModel.find({},(error,data)=>{
